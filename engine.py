@@ -8,6 +8,11 @@ class DemoHandler(BaseHTTPRequestHandler):
         pass
 
     def handle_probe(self):
+        if self.command == "PUT":
+            length = int(self.headers.get("Content-Length", 0))
+            if not 0 <= length <= 1024:
+                return self.send_error(413)
+            self.rfile.read(length)
         grants = {"Bearer demo-read": ("A", False), "Bearer demo-edit": ("A", True)}
         grant = grants.get(self.headers.get("Authorization"))
         if not grant:
