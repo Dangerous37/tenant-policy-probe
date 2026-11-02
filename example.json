@@ -1,0 +1,41 @@
+{
+  "demo": true,
+  "cases": [
+    {
+      "method": "GET",
+      "path": "/tenants/A/item",
+      "role": "reader",
+      "expected": 204
+    },
+    {
+      "method": "PUT",
+      "path": "/tenants/A/item",
+      "role": "reader",
+      "expected": 403
+    },
+    {
+      "method": "PUT",
+      "path": "/tenants/A/item",
+      "role": "editor",
+      "expected": 204
+    },
+    {
+      "method": "GET",
+      "path": "/tenants/B/item",
+      "role": "editor",
+      "expected": 404
+    },
+    {
+      "method": "PUT",
+      "path": "/tenants/B/item",
+      "role": "editor",
+      "expected": 404
+    },
+    {
+      "method": "GET",
+      "path": "/tenants/A/item",
+      "role": "guest",
+      "expected": 401
+    }
+  ]
+}
